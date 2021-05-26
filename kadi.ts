@@ -2,7 +2,7 @@ const suits = ['H','D','C','S'];
 const ranks = ['2','3','4','5','6','7','8','9','10','K','J','Q','A'];
 
 let deck = suits.flatMap((s)=> ranks.map((r)=> `${r}${s}`));
-
+deck.push("JokerA", "JokerB");
 console.log(deck);
 
 const shuffleCards = (deck: any, times=3) => {
@@ -14,8 +14,22 @@ const shuffleCards = (deck: any, times=3) => {
             deck[r] = currentCard;
          }
     }
-    return deck;
 }
 
-deck = shuffleCards(deck);
+shuffleCards(deck);
+
 console.log(deck);
+
+const pickCard = (deck: any, count = 1) => {
+    var cards = [];
+    for(let i = 0; i< count; i++){
+        cards.push(deck.shift());
+    }
+
+    return cards;
+}
+
+
+console.log(pickCard(deck, 3));
+console.log(deck);
+
