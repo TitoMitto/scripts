@@ -1,3 +1,4 @@
+
 /**
  * Promotion Parser helps you parse promotion variations.
  * This formula can parse all valid promotion fomulas that don't contain ambiguous syntax
@@ -5,8 +6,8 @@
  * Created by Tito M. Mitto
  * © MittoLabs 
  */
-
 import 'dart:convert';
+
 
 List parsePromotionFormula(String formula) {
   formula = formula.toLowerCase();
@@ -53,8 +54,8 @@ bool passesPromotion(List<Map<String, int>> products, String formula) {
         group.length > 1 &&
         group.every((i) => i is Map)) {
       bool isPassing = group.any((item) => products.any((p) =>
-          p["product_id"] == int.parse("${item.first["product_id"]}") &&
-          p["quantity"] >= int.parse("${item.first["quantity"]}")));
+          p["product_id"] == int.parse("${item["product_id"]}") &&
+          p["quantity"] >= int.parse("${item["quantity"]}")));
 
       passes.add(isPassing);
     } else if (group is List &&
@@ -79,9 +80,8 @@ bool passesPromotion(List<Map<String, int>> products, String formula) {
 }
 
 void main() {
-  print("PROMO ${parsePromotionFormula('(2#4 and 4#6)')}");
-  print("PASSES ${passesPromotion([
-    {"product_id": 4, "quantity": 2},
-    {"product_id": 6, "quantity": 4}
-  ], "(2#4 and 4#6)")}");
+  bool passes = passesPromotion([
+    {"product_id": 1, "quantity": 1}
+  ], "(1#1)");
+  print("PASSES $passes");
 }
